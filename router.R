@@ -21,15 +21,13 @@ error_handler_404 <- function(req, res) {
   list(Error_404 = "Page not found :(")
 }
 
-# Define the path to your plumber.R file
-plumber_file <- "plumber.R"
-
-# Create a router
-router <- plumb(plumber_file)
-
-# Set error handlers
-router$setErrorHandler(error_handler_500)
-router$set404Handler(error_handler_404)
-
-# Run the API
-router$run(host = "0.0.0.0", port = 8080)
+# Register the router and run the server
+pr(
+  file="plumber.R"
+) %>%
+  pr_set_error(error_handler_500) %>%
+  pr_set_404(error_handler_404) %>%
+  pr_run(
+    host = "0.0.0.0",
+    port = 8080
+    )
