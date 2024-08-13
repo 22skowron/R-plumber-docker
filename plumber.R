@@ -3,6 +3,8 @@
 #* @param future_dates The JSON payload containing the dates for which predictions will be made
 #* @post /predict_n
 function(train_set, future_dates) {
+  print("Predicting ...")
+
   # Parse JSON payload
   ts_model <- as.data.frame(train_set)
   ts_future <- as.data.frame(future_dates)
@@ -72,6 +74,7 @@ function(train_set, future_dates) {
   
   # Create response body
   predictions_df <- data.frame(Data = ts$Data, n_pred = n_pred)
+  print("Sending back predicted values ...")
   
   # Return result as JSON
   predictions_df

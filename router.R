@@ -1,14 +1,12 @@
-# Install & load packages
-if (!require("plumber")) {
-  install.packages("plumber")
-}
+print("Starting router.R script.")
 
-if (!require("lubridate")) {
-  install.packages("lubridate")
-}
-
+# Load packages
 library(plumber)
 library(lubridate)
+
+print("Printing available packages:")
+print(search())
+print("Proceeding to run a router.")
 
 # Error handlers
 error_handler_500 <- function(req, res, err) {
@@ -23,7 +21,7 @@ error_handler_404 <- function(req, res) {
 
 # Register the router and run the server
 pr(
-  file="plumber.R"
+  file="/app/plumber.R"
 ) %>%
   pr_set_error(error_handler_500) %>%
   pr_set_404(error_handler_404) %>%
